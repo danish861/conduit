@@ -19,12 +19,11 @@ interface IProfileInfo {
 
 const ProfileInfo = () => {
   const { query, isReady } = useRouter();
-  if (!isReady) {
-    return <div>LOADING</div>; // handle 1
-  }
+
   const user = query.username;
-  const { data, error } = useSWR<IProfileInfo>(`profiles/${user}`, (url) =>
-    getProfile(url)
+  const { data, error } = useSWR<IProfileInfo>(
+    user ? `profiles/${user}` : null,
+    user ? (url) => getProfile(url) : null
   );
 
   if (!data) {
