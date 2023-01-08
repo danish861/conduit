@@ -1,0 +1,12 @@
+.nonActive {
+    color: rgb(120, 109, 109);
+  }
+  
+ 
+  .active {
+    color: #5cb85c;
+    /* background: orange; */
+  }
+
+  
+  
