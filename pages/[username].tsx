@@ -6,7 +6,7 @@ import authStore from "../store/AuthStore";
 import ProfileInfo from "../components/Profile/ProfileInfo";
 import Head from "next/head";
 
-const profilePage = () => {
+const ProfilePage = () => {
   const { query } = useRouter();
   const username = query.username;
   return (
@@ -19,4 +19,4 @@ const profilePage = () => {
   );
 };
 
-export default profilePage;
+export default ProfilePage;

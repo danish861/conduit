@@ -4,7 +4,7 @@ import { CiLight } from "react-icons/ci";
 import { MdNightsStay } from "react-icons/md";
 
 const DialogCmponent = () => {
-  const [isSelected, setIsSelected] = useState(false);
+  const [isSelected, setIsSelected] = useState(true);
   const { theme, setTheme } = useTheme();
 
   const clickHandler = () => {
