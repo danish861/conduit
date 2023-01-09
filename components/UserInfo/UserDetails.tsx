@@ -1,6 +1,7 @@
 import Link from "next/link";
 import moment from "moment";
 import React from "react";
+import { useRouter } from "next/router";
 
 interface IUserDetailsProps {
   author: {
@@ -11,6 +12,7 @@ interface IUserDetailsProps {
 }
 
 const UserDetails = ({ author, updatedAt }: IUserDetailsProps) => {
+  const router = useRouter();
   return (
     <>
       <div className="flex  gap-2  items-center ">
@@ -18,12 +20,13 @@ const UserDetails = ({ author, updatedAt }: IUserDetailsProps) => {
           <img src={author.image} alt="img" className="rounded-full w-8 h-8" />
         </Link>
         <div className="flex flex-col justify-evenly ">
-          <Link
-            href={`${author.username}`}
+          <button
+            // href={`${author.username}`}
+            onClick={() => router.push(`/${author.username}`)}
             className={`-m-1 ml-0.5 text-green hover:underline`}
           >
             {author.username}
-          </Link>
+          </button>
           <span className=" text-xs ml-0.5 text-slate-300 ">
             {moment(updatedAt).format("MMMM D, YYYY")}
           </span>

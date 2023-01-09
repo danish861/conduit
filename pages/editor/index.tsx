@@ -72,6 +72,7 @@ const NewArticlePage = () => {
               <button
                 type="submit"
                 className=" btn bg-green  hover:bg-emerald-600 py-3 px-6 rounded font-medium text-white  float-right mb-3 "
+                disabled={isSubmitting}
               >
                 Publish Article
               </button>
