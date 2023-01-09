@@ -77,7 +77,7 @@ class AuthStore {
     }
   }
 
-  async hydrate() {
+  async hydrate(): Promise<void> {
     return new Promise((resolve) => {
       resolve();
     });
