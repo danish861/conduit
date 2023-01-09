@@ -9,8 +9,6 @@ const ArticlePage = () => {
   const { query, isReady } = useRouter();
   const slug = query.slug;
 
-  // here type of slug is undefine first and get the string, while defining typescript type it gives error as same
-
   const { data, error } = useSWR(
     slug ? `articles/${slug}` : null,
     slug ? (url) => getArticle(url) : null
@@ -20,7 +18,6 @@ const ArticlePage = () => {
     return <div>Loading</div>;
   }
 
-  console.log(data);
   const {
     title,
     body,
