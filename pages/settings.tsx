@@ -5,7 +5,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
-import { getUser, updateUser } from "../api/user";
+import { getUser, updateUser } from "../APIs/user";
 import authStore from "../store/AuthStore";
 
 interface FormValues {

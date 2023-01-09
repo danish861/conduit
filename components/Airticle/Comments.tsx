@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React from "react";
 import useSWR from "swr";
-import { getComments } from "../../api/article";
+import { getComments } from "../../APIs/article";
 
 import { Formik, Form, Field } from "formik";
 import authStore from "../../store/AuthStore";

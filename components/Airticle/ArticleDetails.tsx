@@ -11,7 +11,7 @@ import FavouriteButton from "../common/FavouriteButton";
 import Comments from "./Comments";
 import authStore from "../../store/AuthStore";
 import { useRouter } from "next/router";
-import { deleteArticle } from "../../api/article";
+import { deleteArticle } from "../../APIs/article";
 
 interface IArticleDetailsProps {
   title: string;

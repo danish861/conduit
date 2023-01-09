@@ -6,7 +6,7 @@ import ArticlTag from "../Tags/ArticlTag";
 import UserDetails from "../UserInfo/UserDetails";
 
 import useSWR from "swr";
-import { getArticleData } from "../../api/article";
+import { getArticleData } from "../../APIs/article";
 import { useState } from "react";
 import authStore from "../../store/AuthStore";
 import FavouriteButton from "../common/FavouriteButton";

@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useState } from "react";
 import { HiHeart } from "react-icons/hi";
-import { deleteFavourite, postFavourite } from "../../api/favourite";
+import { deleteFavourite, postFavourite } from "../../APIs/favourite";
 import authStore from "../../store/AuthStore";
 
 interface IFavouriteButton {

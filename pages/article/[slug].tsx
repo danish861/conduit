@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
-import { getArticle } from "../../api/article";
+import { getArticle } from "../../APIs/article";
 import ArticleDetails from "../../components/Airticle/ArticleDetails";
 
 const ArticlePage = () => {

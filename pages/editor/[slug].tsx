@@ -1,7 +1,7 @@
 import { Formik, Form, Field } from "formik";
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import { getArticle, updateArticle } from "../../api/article";
+import { getArticle, updateArticle } from "../../APIs/article";
 
 const NewArticlePage = () => {
   const router = useRouter();

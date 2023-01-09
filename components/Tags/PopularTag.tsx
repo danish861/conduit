@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import useSWR from "swr";
-import { getTags } from "../../api/tag";
+import { getTags } from "../../APIs/tag";
 
 interface IPopularTagsProps {
   handleTag: (tag: string) => void;

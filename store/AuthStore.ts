@@ -1,6 +1,6 @@
 import { action, makeAutoObservable, makeObservable, observable } from "mobx";
 import { persist } from "mobx-persist";
-import { postUser } from "../api/user";
+import { postUser } from "../APIs/user";
 import { setCookie } from "cookies-next";
 
 // import { enableStaticRendering } from "mobx-react-lite";

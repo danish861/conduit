@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import authStore from "../../store/AuthStore";
 import useSWR from "swr";
 import { useRouter } from "next/router";
-import { followUser, getProfile, unFollowUser } from "../../api/profile";
+import { followUser, getProfile, unFollowUser } from "../../APIs/profile";
 import FollowButton from "../common/FollowButton";
 import Link from "next/link";
 import ProfleDetails from "./ProfleDetails";

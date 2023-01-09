@@ -3,7 +3,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { mutate } from "swr";
-import { followUser, unFollowUser } from "../../api/profile";
+import { followUser, unFollowUser } from "../../APIs/profile";
 import useSWR from "swr";
 import authStore from "../../store/AuthStore";
 import { useRouter } from "next/router";
