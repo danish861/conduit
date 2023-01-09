@@ -23,7 +23,7 @@ interface IArticleDetailsProps {
   };
   favoritesCount: number;
   updatedAt: number;
-  slug?: string | undefined;
+  slug: string;
 }
 
 const ArticleDetails = ({

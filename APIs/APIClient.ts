@@ -10,8 +10,6 @@ interface fetchDataProps {
 }
 
 const fetchData = async ({ method, url, body }: fetchDataProps) => {
-  // get tocken from local storage
-
   const token = getCookie("authToken");
   try {
     const config = {

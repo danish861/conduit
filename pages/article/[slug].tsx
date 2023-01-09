@@ -21,8 +21,15 @@ const ArticlePage = () => {
   }
 
   console.log(data);
-  const { title, body, tagList, author, favoritesCount, updatedAt } =
-    data.article;
+  const {
+    title,
+    body,
+    tagList,
+    author,
+    favoritesCount,
+    updatedAt,
+    slug: slugData,
+  } = data.article;
 
   return (
     <>
@@ -36,7 +43,7 @@ const ArticlePage = () => {
         author={author}
         favoritesCount={favoritesCount}
         updatedAt={updatedAt}
-        slug={slug}
+        slug={slugData}
       />
     </>
   );
