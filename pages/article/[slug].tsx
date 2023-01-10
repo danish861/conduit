@@ -8,6 +8,7 @@ import ArticleDetails from "../../components/Airticle/ArticleDetails";
 const ArticlePage = () => {
   const { query, isReady } = useRouter();
   const slug = query.slug;
+  console.log(query);
 
   const { data, error } = useSWR(
     slug ? `articles/${slug}` : null,

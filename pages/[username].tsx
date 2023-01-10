@@ -1,8 +1,4 @@
 import { useRouter } from "next/router";
-import FollowButton from "../components/common/FollowButton";
-import { RiSettings4Fill } from "react-icons/ri";
-import authStore from "../store/AuthStore";
-
 import ProfileInfo from "../components/Profile/ProfileInfo";
 import Head from "next/head";
 

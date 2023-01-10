@@ -33,7 +33,13 @@ const LogInNavigation = () => {
           currentRoute == "/setting" ? classes.active : classes.nonActive
         }
       >
-        <Link href={authStore.username}>
+        <button
+          onClick={() =>
+            router.replace({
+              pathname: `/${authStore.username}`,
+            })
+          }
+        >
           <div className="flex items-center gap-1 ">
             <img
               src={AuthStore.image}
@@ -42,7 +48,7 @@ const LogInNavigation = () => {
             />
             <p> {authStore.username}</p>
           </div>
-        </Link>
+        </button>
       </li>
     </>
   );

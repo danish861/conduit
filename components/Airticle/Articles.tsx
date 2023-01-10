@@ -57,8 +57,8 @@ const Articles = ({ query, url }: ArticlesProps) => {
 
   return (
     <>
-      <div className="flex flex-col items-center gap-4 mb-10">
-        <div className="flex flex-col  justify-center align-middle ml-10">
+      <div className="flex flex-col items-center gap-4 mb-10 ">
+        <div className="flex flex-col  justify-center md:w-11/12    ">
           {articles.map((data) => {
             return (
               <>
@@ -80,7 +80,7 @@ const Articles = ({ query, url }: ArticlesProps) => {
                 <div className=" flex flex-col">
                   <Link
                     href={`article/${data.slug}`}
-                    className="text-2xl font-semibold dark:text-gray-900   "
+                    className="text-2xl font-semibold dark:text-gray-900"
                   >
                     {data.title}
                   </Link>

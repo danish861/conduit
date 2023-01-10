@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useSWR from "swr";
-import { getComments } from "../../APIs/article";
+import { getComments, postComments } from "../../APIs/article";
 
 import { Formik, Form, Field } from "formik";
 import authStore from "../../store/AuthStore";
@@ -19,27 +19,47 @@ interface IComments {
     username: string;
   };
   updatedAt: number;
+  id: number;
 }
 
 const Comments = () => {
   const { query } = useRouter();
   const slug = query.slug;
 
-  const { data, error } = useSWR(`articles/${slug}/comments`, (url) =>
-    getComments(url)
-  );
+  const [commentsData, setCommentsData] = useState<IComments[]>([]);
 
-  if (!data) {
-    return <div>Loading......</div>; // handle
-  }
-  const comments: IComments[] = data.comments;
+  // previously done in this way
+  // const { data, error } = useSWR(
+  //   slug ? `articles/${slug}/comments` : null,
+  //   slug ? (url) => getComments(url) : null
+  // );
+  // const comments: IComments[] = data.comments;
+
+  useEffect(() => {
+    const comments = async () => {
+      const response = await getComments(`articles/${slug}/comments`);
+      const comments = response.comments;
+
+      setCommentsData(comments);
+    };
+
+    comments();
+  }, [slug]);
 
   return (
     <>
       <Formik
         initialValues={{ message: "" }}
-        onSubmit={(values: FormValues) => {
+        onSubmit={async (values: FormValues) => {
           // submit the form
+
+          postComments(`articles/${slug}/comments`, {
+            comment: {
+              body: values.message,
+            },
+          })
+            .then((data) => setCommentsData([data.comment, ...commentsData]))
+            .catch((error) => console.log(error));
         }}
       >
         {() => (
@@ -49,7 +69,7 @@ const Comments = () => {
                 name="message"
                 component="textarea"
                 placeholder="Write a comments..."
-                className=" block w-full h-32 outline-none  rounded-md "
+                className=" block w-full h-32 p-3 outline-none  rounded-md "
               />
               <div className="flex justify-between  border-t  p-3  bg-gray-100 items-center ">
                 <img
@@ -69,10 +89,10 @@ const Comments = () => {
         )}
       </Formik>
 
-      {comments.map((comment) => {
+      {commentsData?.map((comment) => {
         return (
           <>
-            <div className="border  mt-4" key={comment.body}>
+            <div className="border  mt-4" key={comment.id}>
               <div>
                 <p className="p-5">{comment.body}</p>
               </div>

@@ -4,7 +4,7 @@ import Articles from "../Airticle/Articles";
 import { useRouter } from "next/router";
 
 const ProfleDetails = () => {
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  // const [selectedIndex, setSelectedIndex] = useState(0);
   const router = useRouter();
   const { username } = router.query;
 
@@ -12,11 +12,11 @@ const ProfleDetails = () => {
     <>
       <div className="flex flex-col ">
         <Tab.Group
-          defaultIndex={selectedIndex}
-          selectedIndex={selectedIndex}
-          onChange={setSelectedIndex}
+          defaultIndex={0}
+          // selectedIndex={selectedIndex}
+          // onChange={setSelectedIndex}
         >
-          <Tab.List className=" flex gap-3 w-2/3  ml-72 mt-10 ">
+          <Tab.List className=" flex gap-3 w-2/3   md:ml-72 ml-20 mt-10 ">
             <Tab as={Fragment}>
               {({ selected }) => (
                 /* Use the `selected` state to conditionally style the selected tab. */
@@ -34,7 +34,6 @@ const ProfleDetails = () => {
 
             <Tab as={Fragment}>
               {({ selected }) => (
-                /* Use the `selected` state to conditionally style the selected tab. */
                 <button
                   className={
                     selected
@@ -49,9 +48,10 @@ const ProfleDetails = () => {
           </Tab.List>
           <hr className=" h-px bg-gray-200 border-0 dark:bg-gray-700 w-2/3  ml-72 " />
 
-          <Tab.Panels className=" w-2/3  ml-56">
-            <Tab.Panel></Tab.Panel>
-            <Articles query={`?author=${username}&`} url="/" />
+          <Tab.Panels className=" md:w-2/3   sm:w-3/4     md:ml-56  ml-14  ">
+            <Tab.Panel>
+              <Articles query={`?author=${username}&`} url="/" />
+            </Tab.Panel>
             <Tab.Panel>
               <Articles query={`?favorited=${username}&`} url="/" />
             </Tab.Panel>

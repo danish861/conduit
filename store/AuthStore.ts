@@ -41,7 +41,7 @@ class AuthStore {
       return response;
     } catch (error: any) {
       if (
-        error.response.data.errors.username &&
+        error.response?.data.errors.username &&
         error.response.data.errors.email
       ) {
         this.error = "username and email have already been taken ";

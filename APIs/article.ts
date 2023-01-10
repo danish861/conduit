@@ -10,6 +10,20 @@ export const getArticle = (url: string) => GET(url);
 
 export const getComments = (url: string) => GET(url);
 
+interface ICommentsProps {
+  body: string;
+}
+
+export const postComments = (
+  url: string,
+  body: {
+    comment: ICommentsProps;
+  }
+) => {
+  console.log(body);
+  return POST(url, body);
+};
+
 // POST the article
 
 interface postProps {

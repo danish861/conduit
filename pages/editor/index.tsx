@@ -17,11 +17,8 @@ const NewArticlePage = () => {
           description: "",
           tagList: "",
         }}
-        onSubmit={async (values, { setSubmitting }) => {
+        onSubmit={(values, { setSubmitting }) => {
           const tag = values.tagList.split(" ");
-          console.log(tag);
-          // const tagList = values.tagList.split("\n");
-          console.log("######## ARTICLE VALUES", values);
 
           postArticle("/articles", {
             article: {

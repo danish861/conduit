@@ -15,7 +15,7 @@ const UserDetails = ({ author, updatedAt }: IUserDetailsProps) => {
   const router = useRouter();
   return (
     <>
-      <div className="flex  gap-2  items-center ">
+      <div className="flex  gap-2 items-center ">
         <Link href={`${author.username}`}>
           <img src={author.image} alt="img" className="rounded-full w-8 h-8" />
         </Link>

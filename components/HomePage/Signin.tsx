@@ -46,6 +46,7 @@ const Signin = observer(() => {
                 id="text"
                 className="block w-full p-2.5 border border-gray-400 rounded-md outline-none focus:ring-cornflower focus:border-cornflower mb-3"
                 placeholder="Email"
+                required
               />
 
               <Field
@@ -54,6 +55,7 @@ const Signin = observer(() => {
                 id="password"
                 className="block w-full p-2.5 border border-gray-400 rounded-md outline-none focus:ring-cornflower focus:border-cornflower mb-3"
                 placeholder="Password"
+                required
               />
 
               <button

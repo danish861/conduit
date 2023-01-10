@@ -17,19 +17,41 @@ interface FormValues {
 }
 
 const SettingsPage = () => {
+  // const [user, setUser] = useState({
+  //   image: "",
+  //   username: "",
+  //   bio: "",
+  //   email: "",
+  //   password: "",
+  // });
+
   const [error, setError] = useState(null);
   const [fetch, setFetch] = useState(false);
   const router = useRouter();
 
   // the very same error occure in the main website but on page relaod I had this issue with on page click also
-  const { data, error: err } = useSWR("/user", (url) => getUser(url));
+  // const { data, error: err } = useSWR("/user", (url) => getUser(url));
 
+  //NOTE:  initially show the null value in bio and didn't update on run time // FIND   IF THERE ANYWAY POSSIBLE IN THIS  // reslove issue was with formik
   //    run useSWR with condition on useEffect : ##CHECK
+  // error: initially show the null value in bio and didn't update on run time
+  // console.log(userData);
+
+  const { data, error: err } = useSWR("/user", (url) => getUser(url));
 
   if (!data) {
     return;
   }
   const user = data.user;
+
+  // useEffect(() => {
+  //   const userData = async () => {
+  //     const { user } = await getUser("/user");
+  //     console.log(user);
+  //     setUser({ ...user });
+  //   };
+  //   userData();
+  // }, []);
 
   return (
     <>
@@ -37,10 +59,11 @@ const SettingsPage = () => {
         <title>Setting -- Conduit</title>
       </Head>
       <Formik
+        enableReinitialize={true}
         initialValues={{
           image: `${user.image}`,
           username: `${user.username}`,
-          bio: `${user.bio}`,
+          bio: `${user.bio}` ? `${user.bio}` : "",
           email: `${user.email}`,
           password: "",
           action: "",

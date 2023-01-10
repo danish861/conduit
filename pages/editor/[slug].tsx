@@ -1,14 +1,14 @@
 import { Formik, Form, Field } from "formik";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import useSWR from "swr";
 import { getArticle, updateArticle } from "../../APIs/article";
 
 const NewArticlePage = () => {
+  const [updatedSlug, setUpdatedSlug] = useState("");
   const router = useRouter();
 
   const slug = router.query.slug;
-  // console.log(slug);
-  // if(slug!== )
 
   const { data, error } = useSWR(
     slug ? `articles/${slug}` : null,
@@ -16,10 +16,9 @@ const NewArticlePage = () => {
   );
 
   if (error) {
-    router.push("/"); //     QUESTION
+    router.push("/");
   }
 
-  console.log(error);
   if (!data) {
     return;
   }
@@ -27,6 +26,7 @@ const NewArticlePage = () => {
 
   return (
     <Formik
+      enableReinitialize={true}
       initialValues={{
         title: title,
         body: body,
@@ -34,11 +34,6 @@ const NewArticlePage = () => {
         tagList: "",
       }}
       onSubmit={(values, { setSubmitting }) => {
-        // const tag = values.tagList.split(" ");
-        // console.log(tag);
-        // // const tagList = values.tagList.split("\n");
-        // console.log("######## ARTICLE VALUES", values);
-
         updateArticle(`articles/${slug}`, {
           article: {
             title: values.title,
@@ -48,7 +43,11 @@ const NewArticlePage = () => {
         })
           .then((data) => {
             if (data.article) {
-              router.push(`article/${slug}`); //   QUESTION, NEED TO ASK
+              console.log(data.article);
+              setUpdatedSlug(data.article.slug);
+              router.replace({
+                pathname: `/article/${data.article.slug}`,
+              });
             }
           })
           .catch((error) => console.log(error));
@@ -85,7 +84,8 @@ const NewArticlePage = () => {
 
             <button
               type="submit"
-              className=" btn bg-green  hover:bg-emerald-600 py-3 px-6 rounded font-medium text-white  float-right mb-3 "
+              className=" btn bg-green  hover:bg-emerald-600 py-3 px-6 rounded font-medium text-white  float-right mb-3"
+              disabled={isSubmitting}
             >
               Publish Article
             </button>

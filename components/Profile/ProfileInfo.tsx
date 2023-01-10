@@ -41,10 +41,10 @@ const ProfileInfo = () => {
         </div>
 
         {authStore.username === username ? (
-          <div className=" md:absolute  bottom-3  right-52 ">
+          <div className=" md:absolute bottom-3  md:right-52 w-44  ">
             <Link
               href="/settings"
-              className=" text-gray-500 hover:text-gray-300 text-xs mr-2 px-2.5 py-0.5  border hover:outline-none  rounded hover:bg-gray-400  flex  items-center gap-1 h-7"
+              className=" text-gray-500 hover:text-gray-300 text-xs mr-2 px-2.5 py-0.5  border hover:outline-none  rounded hover:bg-gray-400  flex  items-center gap-1 h-7 "
             >
               <RiSettings4Fill fontSize={14} /> Edit Profile Settings
             </Link>

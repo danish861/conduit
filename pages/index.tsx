@@ -3,20 +3,20 @@ import Articles from "../components/Airticle/Articles";
 import { useState } from "react";
 import { Tab } from "@headlessui/react";
 import PopularTag from "../components/Tags/PopularTag";
-import { useTheme } from "next-themes";
 
 import authStore from "../store/AuthStore";
 import { observer } from "mobx-react-lite";
-import DialogCmponent from "../components/layouts/DialogCmponent";
 import Head from "next/head";
 
 const HomePage = () => {
-  // const { theme, setTheme } = useTheme();
   const [tagName, setTagName] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
+
   const handleTag = (tagName: string) => {
+    authStore.isLoggedIn ? setSelectedIndex(2) : setSelectedIndex(1);
     setTagName(tagName);
   };
+
   return (
     <>
       <Head>
@@ -34,14 +34,6 @@ const HomePage = () => {
         <p className="text-zinc-100  text-xl">
           A place to share your knowledge
         </p>
-
-        {/* <select value={theme} onChange={(e) => setTheme(e.target.value)}>
-          <option value="system">System</option>
-          <option value="dark">Dark</option>
-          <option value="light">Light</option>
-        </select> */}
-
-        {/* <DialogCmponent /> */}
       </div>
 
       <div className=" flex md:flex-row flex-col  gap-2 lg:mx-48  mx-11 my-10  ">
@@ -80,19 +72,21 @@ const HomePage = () => {
                   </button>
                 )}
               </Tab>
-              <Tab as={Fragment}>
-                {({ selected }) => (
-                  <button
-                    className={
-                      selected
-                        ? "text-green outline-none  border-b-2 border-b-green py-2"
-                        : "bg-white text-gray-500"
-                    }
-                  >
-                    {tagName}
-                  </button>
-                )}
-              </Tab>
+              {(selectedIndex === 2 || selectedIndex === 1) && (
+                <Tab as={Fragment}>
+                  {({ selected }) => (
+                    <button
+                      className={
+                        selected
+                          ? "text-green outline-none  border-b-2 border-b-green py-2"
+                          : "bg-white text-gray-500"
+                      }
+                    >
+                      {tagName}
+                    </button>
+                  )}
+                </Tab>
+              )}
             </Tab.List>
             <hr className=" h-px bg-gray-200 border-0 dark:bg-gray-700 ml-10" />
             <Tab.Panels>

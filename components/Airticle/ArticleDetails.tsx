@@ -50,7 +50,7 @@ const ArticleDetails = ({
           <div className=" flex items-center gap-5  ">
             <UserDetails author={author} updatedAt={updatedAt} />
 
-            <div className="flex">
+            <div className=" flex md:flex-row xs:flex-col xs:gap-1  md:gap-0 ">
               {authStore.username === username ? (
                 <>
                   <button
@@ -96,17 +96,44 @@ const ArticleDetails = ({
         </ul>
         <hr className="my-8 h-px bg-gray-200 border-0 dark:bg-gray-700" />
 
-        <div className=" flex items-center gap-5  justify-center">
+        <div className=" flex items-center gap-5 ml-8 sm:ml-28 lg:ml-96">
           <UserDetails author={author} updatedAt={updatedAt} />
-          <div className="flex flex-col sm:flex-row gap-2 sm:gap-0">
-            <FollowButton user={author.username} />
 
-            <button className=" text-green hover:text-white text-xs mr-2 px-2.5 py-0.5 border border-green   rounded hover:bg-green hover:outline-none  flex  items-center gap-1 h-7   ">
-              <HiHeart fontSize={20} /> Follow {author.username}
-            </button>
+          <div className="flex md:flex-row xs:flex-col xs:gap-1  md:gap-0">
+            {authStore.username === username ? (
+              <>
+                <button
+                  onClick={() => router.push(`/editor/${slug}`)}
+                  className=" text-gray-500 hover:text-white text-xs mr-2 px-2.5 py-0.5 border border-gray-100   rounded hover:bg-slate-300 hover:outline-none  flex  items-center gap-1 h-7   "
+                >
+                  <MdOutlineModeEdit fontSize={18} />
+                  Edit Article
+                </button>
+
+                <button
+                  className=" text-red-400 hover:text-white text-xs mr-2 px-2.5 py-0.5 border border-red-400   rounded hover:bg-red-500 hover:outline-none  flex  items-center gap-1 h-7 "
+                  onClick={deleteHandler}
+                >
+                  <RiDeleteBin6Line fontSize={14} />
+                  Delete Article
+                </button>
+              </>
+            ) : (
+              <>
+                <FollowButton user={author.username} />
+                <button className=" text-green hover:text-white text-xs mr-2 px-2.5 py-0.5 border border-green   rounded hover:bg-green hover:outline-none  flex  items-center gap-1 h-7   ">
+                  <HiHeart fontSize={20} />
+                  {favoritesCount}
+                </button>
+              </>
+            )}
+
+            {/* <FavouriteButton
+                favoritesCount={favoritesCount}
+                slug={author.username}
+              /> */}
           </div>
         </div>
-
         <div className=" xl:px-48 lg:px-28  sm:px-10 py-10">
           {authStore.isLoggedIn ? (
             <Comments />
