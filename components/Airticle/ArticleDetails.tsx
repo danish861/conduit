@@ -91,8 +91,8 @@ const ArticleDetails = ({
       <div className="mx-9  lg:mx-40 p-7 ">
         <p className="leading-7 text-lg mb-5">{body}</p>
         <ul className="flex">
-          {tagList?.map((tag) => {
-            return <ArticlTag tag={tag} />;
+          {tagList?.map((tag, index) => {
+            return <ArticlTag tag={tag} key={index} />;
           })}
         </ul>
         <hr className="my-8 h-px bg-gray-200 border-0 dark:bg-gray-700" />
