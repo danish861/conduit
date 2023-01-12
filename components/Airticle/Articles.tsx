@@ -57,57 +57,56 @@ const Articles = ({ query, url }: ArticlesProps) => {
     <>
       <div className="flex flex-col items-center gap-4 mb-10  ">
         <div className="flex flex-col  justify-center md:w-11/12  sm:w-4/5 ">
-          {articles.map((data) => {
+          {articles.map((data, index) => {
             return (
               <>
-                <div
-                  className="flex flex-row justify-between items-center mt-4"
-                  key={data.title}
-                >
-                  <UserDetails
-                    author={data.author}
-                    updatedAt={data.updatedAt}
-                  />
-                  <div>
-                    <FavouriteButton
-                      favoritesCount={data.favoritesCount}
-                      slug={data.slug}
+                <div key={index}>
+                  <div className="flex flex-row justify-between items-center mt-4">
+                    <UserDetails
+                      author={data.author}
+                      updatedAt={data.updatedAt}
                     />
+                    <div>
+                      <FavouriteButton
+                        favoritesCount={data.favoritesCount}
+                        slug={data.slug}
+                      />
+                    </div>
                   </div>
+                  <div className=" flex flex-col mt-3">
+                    <Link
+                      href={{
+                        pathname: `article/${data.slug}`,
+                        // hash: "/",
+                      }}
+                      className="text-2xl font-semibold text-gray-900  dark:text-gray-300"
+                    >
+                      {data.title}
+                    </Link>
+                    <Link
+                      href={`article/${data.slug}`}
+                      className="text-gray-400  dark:text-gray-600  "
+                    >
+                      {data.description}
+                    </Link>
+                  </div>
+                  <div className="flex justify-between   mt-4">
+                    <Link
+                      href={`article/${data.slug}`}
+                      className="text-gray-400   dark:text-gray-600  text-sm"
+                    >
+                      Read more...
+                    </Link>
+                    <ul className="flex justify-end mb-5">
+                      {data.tagList.map((tag, index) => (
+                        <Link href={`article/${data.slug}`} key={index}>
+                          <ArticlTag tag={tag} />
+                        </Link>
+                      ))}
+                    </ul>
+                  </div>
+                  <hr className=" h-px bg-gray-200 border-0 dark:bg-gray-700" />
                 </div>
-                <div className=" flex flex-col mt-3">
-                  <Link
-                    href={{
-                      pathname: `article/${data.slug}`,
-                      // hash: "/",
-                    }}
-                    className="text-2xl font-semibold text-gray-900  dark:text-gray-300"
-                  >
-                    {data.title}
-                  </Link>
-                  <Link
-                    href={`article/${data.slug}`}
-                    className="text-gray-400  dark:text-gray-600  "
-                  >
-                    {data.description}
-                  </Link>
-                </div>
-                <div className="flex justify-between   mt-4">
-                  <Link
-                    href={`article/${data.slug}`}
-                    className="text-gray-400   dark:text-gray-600  text-sm"
-                  >
-                    Read more...
-                  </Link>
-                  <ul className="flex justify-end mb-5">
-                    {data.tagList.map((tag) => (
-                      <Link href={`article/${data.slug}`}>
-                        <ArticlTag tag={tag} key={tag} />
-                      </Link>
-                    ))}
-                  </ul>
-                </div>
-                <hr className=" h-px bg-gray-200 border-0 dark:bg-gray-700" />
               </>
             );
           })}
