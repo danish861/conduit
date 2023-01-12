@@ -30,7 +30,9 @@ const LogInNavigation = () => {
 
       <li
         className={
-          currentRoute == "/setting" ? classes.active : classes.nonActive
+          router.asPath == `/${authStore.username}`
+            ? classes.active
+            : classes.nonActive
         }
       >
         <button

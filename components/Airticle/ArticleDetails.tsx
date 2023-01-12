@@ -12,6 +12,7 @@ import Comments from "./Comments";
 import authStore from "../../store/AuthStore";
 import { useRouter } from "next/router";
 import { deleteArticle } from "../../APIs/article";
+import FavouriteButtonCount from "../common/FavouriteButtonCount";
 
 interface IArticleDetailsProps {
   title: string;
@@ -20,9 +21,11 @@ interface IArticleDetailsProps {
   author: {
     username: string;
     image: string;
+    following: boolean;
   };
   favoritesCount: number;
   updatedAt: number;
+  favorited: boolean;
   slug: string;
 }
 
@@ -33,6 +36,7 @@ const ArticleDetails = ({
   author,
   favoritesCount,
   updatedAt,
+  favorited,
   slug,
 }: IArticleDetailsProps) => {
   const username = author.username;
@@ -42,6 +46,7 @@ const ArticleDetails = ({
     await deleteArticle(`articles/${slug}`);
     router.push("/");
   };
+
   return (
     <>
       <div className="bg-mildBlack ">
@@ -71,11 +76,15 @@ const ArticleDetails = ({
                 </>
               ) : (
                 <>
-                  <FollowButton user={author.username} />
-                  <button className=" text-green hover:text-white text-xs mr-2 px-2.5 py-0.5 border border-green   rounded hover:bg-green hover:outline-none  flex  items-center gap-1 h-7   ">
-                    <HiHeart fontSize={20} />
-                    {favoritesCount}
-                  </button>
+                  <FollowButton
+                    user={author.username}
+                    following={author.following}
+                  />
+                  <FavouriteButtonCount
+                    favoritesCount={favoritesCount}
+                    slug={slug}
+                    favorited={favorited}
+                  />
                 </>
               )}
 
@@ -99,7 +108,7 @@ const ArticleDetails = ({
         <div className=" flex items-center gap-5 ml-8 sm:ml-28 lg:ml-96">
           <UserDetails author={author} updatedAt={updatedAt} />
 
-          <div className="flex md:flex-row xs:flex-col xs:gap-1  md:gap-0">
+          <div className="flex ">
             {authStore.username === username ? (
               <>
                 <button
@@ -120,18 +129,17 @@ const ArticleDetails = ({
               </>
             ) : (
               <>
-                <FollowButton user={author.username} />
-                <button className=" text-green hover:text-white text-xs mr-2 px-2.5 py-0.5 border border-green   rounded hover:bg-green hover:outline-none  flex  items-center gap-1 h-7   ">
-                  <HiHeart fontSize={20} />
-                  {favoritesCount}
-                </button>
+                <FollowButton
+                  user={author.username}
+                  following={author.following}
+                />
+                <FavouriteButtonCount
+                  favoritesCount={favoritesCount}
+                  slug={slug}
+                  favorited={favorited}
+                />
               </>
             )}
-
-            {/* <FavouriteButton
-                favoritesCount={favoritesCount}
-                slug={author.username}
-              /> */}
           </div>
         </div>
         <div className=" xl:px-48 lg:px-28  sm:px-10 py-10">

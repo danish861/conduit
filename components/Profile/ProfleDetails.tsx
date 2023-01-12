@@ -24,7 +24,7 @@ const ProfleDetails = () => {
                   className={
                     selected
                       ? "text-green outline-none  border-b-2 border-b-green py-2"
-                      : "bg-white text-black"
+                      : "text-black dark:text-gray-300"
                   }
                 >
                   My Articles
@@ -38,7 +38,7 @@ const ProfleDetails = () => {
                   className={
                     selected
                       ? "text-green outline-none  border-b-2 border-b-green py-2"
-                      : "bg-white text-black"
+                      : "text-black dark:text-gray-300"
                   }
                 >
                   Favorited Article

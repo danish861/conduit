@@ -21,20 +21,21 @@ const MainNavigation = observer((props: any) => {
 
   return (
     <>
-      <header className="flex flex-col xs:flex-row items-center justify-between mx-9  lg:mx-40 p-2   ">
-        <div className="flex gap-14">
+      <header className="flex flex-col xs:flex-row items-center justify-between mx-9  lg:mx-48 p-2   ">
+        <div className="flex gap-7">
           <Link
             href="/"
             className="font-Titillium text-green text-xl font-bold"
           >
             conduit
           </Link>
-
-          <DialogCmponent />
         </div>
 
         <nav>
-          <ul className="flex items-center  gap-4 ">
+          <ul className="flex items-center gap-4 ">
+            <li>
+              <DialogCmponent />
+            </li>
             <li
               className={
                 currentRoute == "/" ? classes.active : classes.nonActive

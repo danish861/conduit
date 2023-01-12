@@ -1,3 +1,4 @@
+import React, { useMemo, memo } from "react";
 import Link from "next/link";
 import { CiHeart } from "react-icons/ci";
 import { HiHeart } from "react-icons/hi";
@@ -7,10 +8,12 @@ import UserDetails from "../UserInfo/UserDetails";
 
 import useSWR from "swr";
 import { getArticleData } from "../../APIs/article";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import authStore from "../../store/AuthStore";
 import FavouriteButton from "../common/FavouriteButton";
 import { ColorRing } from "react-loader-spinner";
+import { useRouter } from "next/router";
+import { Hash } from "crypto";
 
 interface ArticlesProps {
   query: string;
@@ -31,23 +34,24 @@ interface Article {
 }
 
 const Articles = ({ query, url }: ArticlesProps) => {
+  const router = useRouter();
   const [offset, setOffset] = useState(1);
   const [selectedPage, setCurrentPage] = useState(1);
 
   const queryString = `${query}limit=10&offset=${10 * (offset - 1)}`;
 
-  const { data } = useSWR(`articles/${queryString}`, (url) =>
+  const { data, error, isLoading } = useSWR(`articles/${queryString}`, (url) =>
     getArticleData(url)
   );
 
-  if (!data) return <ColorRing />;
+  if (isLoading) return <ColorRing />;
 
   const { articles: articlesData, articlesCount } = data;
 
   const articles: Article[] = articlesData;
 
   if (articles.length === 0) {
-    return <div>No article yet..</div>;
+    return <div className="m-8">No article are here... yet.</div>;
   }
 
   const pageHandler = (num: number) => {
@@ -57,8 +61,8 @@ const Articles = ({ query, url }: ArticlesProps) => {
 
   return (
     <>
-      <div className="flex flex-col items-center gap-4 mb-10 ">
-        <div className="flex flex-col  justify-center md:w-11/12    ">
+      <div className="flex flex-col items-center gap-4 mb-10  ">
+        <div className="flex flex-col  justify-center md:w-11/12 ">
           {articles.map((data) => {
             return (
               <>
@@ -77,27 +81,35 @@ const Articles = ({ query, url }: ArticlesProps) => {
                     />
                   </div>
                 </div>
-                <div className=" flex flex-col">
+                <div className=" flex flex-col mt-3">
                   <Link
-                    href={`article/${data.slug}`}
-                    className="text-2xl font-semibold dark:text-gray-900"
+                    href={{
+                      pathname: `article/${data.slug}`,
+                      // hash: "/",
+                    }}
+                    className="text-2xl font-semibold text-gray-900  dark:text-gray-300"
                   >
                     {data.title}
                   </Link>
-                  <Link href={`article/${data.slug}`} className="text-gray-400">
+                  <Link
+                    href={`article/${data.slug}`}
+                    className="text-gray-400  dark:text-gray-600  "
+                  >
                     {data.description}
                   </Link>
                 </div>
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between   mt-4">
                   <Link
                     href={`article/${data.slug}`}
-                    className="text-gray-400  text-sm"
+                    className="text-gray-400   dark:text-gray-600  text-sm"
                   >
                     Read more...
                   </Link>
                   <ul className="flex justify-end mb-5">
                     {data.tagList.map((tag) => (
-                      <ArticlTag tag={tag} key={tag} />
+                      <Link href={`article/${data.slug}`}>
+                        <ArticlTag tag={tag} key={tag} />
+                      </Link>
                     ))}
                   </ul>
                 </div>
@@ -116,4 +128,4 @@ const Articles = ({ query, url }: ArticlesProps) => {
   );
 };
 
-export default Articles;
+export default memo(Articles);

@@ -6,14 +6,17 @@ import { getArticle } from "../../APIs/article";
 import ArticleDetails from "../../components/Airticle/ArticleDetails";
 
 const ArticlePage = () => {
-  const { query, isReady } = useRouter();
-  const slug = query.slug;
-  console.log(query);
+  const router = useRouter();
+  const slug = router.query.slug;
 
   const { data, error } = useSWR(
     slug ? `articles/${slug}` : null,
     slug ? (url) => getArticle(url) : null
   );
+
+  if (error) {
+    router.push("/");
+  }
 
   if (!data) {
     return <div>Loading</div>;
@@ -26,6 +29,7 @@ const ArticlePage = () => {
     author,
     favoritesCount,
     updatedAt,
+    favorited,
     slug: slugData,
   } = data.article;
 
@@ -41,6 +45,7 @@ const ArticlePage = () => {
         author={author}
         favoritesCount={favoritesCount}
         updatedAt={updatedAt}
+        favorited={favorited}
         slug={slugData}
       />
     </>

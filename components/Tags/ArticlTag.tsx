@@ -7,7 +7,7 @@ interface IArticleTagProps {
 const ArticlTag = ({ tag }: IArticleTagProps) => {
   return (
     <div>
-      <li className=" text-gray-500 text-xs mr-2 px-2.5 py-0.5 border  rounded-xl dark:bg-gray-700 dark:text-gray-300 ">
+      <li className=" text-gray-400  dark:text-gray-700   text-xs mr-2 px-2.5 py-0.5 border  rounded-xl  bg-gray-100  ">
         {tag}
       </li>
     </div>

@@ -1,21 +1,33 @@
 import React, { Fragment } from "react";
 import Articles from "../components/Airticle/Articles";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Tab } from "@headlessui/react";
 import PopularTag from "../components/Tags/PopularTag";
 
 import authStore from "../store/AuthStore";
 import { observer } from "mobx-react-lite";
 import Head from "next/head";
+import { Router, useRouter } from "next/router";
 
 const HomePage = () => {
   const [tagName, setTagName] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
 
+  const router = useRouter();
+  // const hash = router.asPath.split("#")[1] || "";
+  // const showModal = hash === "modal1" ? true : false;
+
   const handleTag = (tagName: string) => {
     authStore.isLoggedIn ? setSelectedIndex(2) : setSelectedIndex(1);
     setTagName(tagName);
   };
+
+  // const handleBaseUrl = () => {
+  //   router.push({
+  //     pathname: "/",
+  //     hash: "/",
+  //   });
+  // };
 
   return (
     <>
@@ -43,7 +55,7 @@ const HomePage = () => {
             selectedIndex={selectedIndex}
             onChange={setSelectedIndex}
           >
-            <Tab.List className=" ml-10 flex gap-5   ">
+            <Tab.List className=" ml-10 flex gap-5">
               {authStore.isLoggedIn ? (
                 <Tab as={Fragment}>
                   {({ selected }) => (
@@ -51,7 +63,7 @@ const HomePage = () => {
                       className={
                         selected
                           ? "text-green outline-none  border-b-2 border-b-green py-2"
-                          : "bg-white text-gray-500"
+                          : "text-gray-500  dark:text-gray-200 "
                       }
                     >
                       Your Feed
@@ -65,7 +77,7 @@ const HomePage = () => {
                     className={
                       selected
                         ? "text-green outline-none  border-b-2 border-b-green py-2"
-                        : "bg-white text-gray-500"
+                        : " text-gray-500  dark:text-gray-200  "
                     }
                   >
                     Global Feed
@@ -79,7 +91,7 @@ const HomePage = () => {
                       className={
                         selected
                           ? "text-green outline-none  border-b-2 border-b-green py-2"
-                          : "bg-white text-gray-500"
+                          : " text-gray-500  dark:text-gray-200 "
                       }
                     >
                       {tagName}
@@ -88,7 +100,7 @@ const HomePage = () => {
                 </Tab>
               )}
             </Tab.List>
-            <hr className=" h-px bg-gray-200 border-0 dark:bg-gray-700 ml-10" />
+            <hr className="h-px bg-gray-200 border-0 dark:bg-gray-700 ml-10" />
             <Tab.Panels>
               {authStore.isLoggedIn ? (
                 <Tab.Panel>

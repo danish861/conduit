@@ -14,10 +14,12 @@ interface IProfileInfo {
     username: string;
     image: string;
     bio: string;
+    following: boolean;
   };
 }
 
 const ProfileInfo = () => {
+  const router = useRouter();
   const { query, isReady } = useRouter();
 
   const user = query.username;
@@ -26,17 +28,25 @@ const ProfileInfo = () => {
     user ? (url) => getProfile(url) : null
   );
 
+  if (error) {
+    router.push("/");
+  }
+
   if (!data) {
     return <div>Loading......</div>; // handle
   }
-  const { username, image, bio } = data.profile;
+
+  const { username, image, bio, following } = data.profile;
 
   return (
     <>
       <div className="bg-darkGray p-4 flex flex-col md:relative  ">
         <div className="flex flex-col items-center  p-6">
           <img src={image} alt="user_img" className="rounded-full  w-20" />
-          <p className="text-2xl font-bold mt-3"> {username} </p>
+          <p className="text-2xl font-bold mt-3  dark:text-gray-600">
+            {" "}
+            {username}{" "}
+          </p>
           <p>{bio}</p>
         </div>
 
@@ -51,7 +61,7 @@ const ProfileInfo = () => {
           </div>
         ) : (
           <div className="md:absolute  bottom-3  right-52 ">
-            <FollowButton user={username} />
+            <FollowButton user={username} following={following} />
           </div>
         )}
       </div>

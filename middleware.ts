@@ -5,6 +5,7 @@ export function middleware(req: NextRequest, res: NextResponse) {
   const verify = req.cookies.get("authToken")?.value;
   let url = req.url;
 
+  // console.log("==============middle ware data===============", req.url);
   // console.log("what is this url value", url);
 
   if (!verify && url.includes("/settings")) {
