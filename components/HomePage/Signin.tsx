@@ -1,13 +1,14 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { observer } from "mobx-react";
 import { Formik, Form, Field } from "formik";
 import authStore from "../../store/AuthStore";
 import { useRouter } from "next/router";
 
 const Signin = observer(() => {
+  const [err, setErr] = useState("");
   const router = useRouter();
-  const err = authStore.error;
+
   return (
     <Formik
       initialValues={{ email: "", password: "" }}
@@ -22,6 +23,10 @@ const Signin = observer(() => {
           .then((data) => {
             if (data.user) {
               router.push("/");
+            }
+
+            if (data.response.data.errors) {
+              setErr(data.response.data.errors["email or password"][0]);
             }
           });
       }}

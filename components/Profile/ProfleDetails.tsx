@@ -16,7 +16,7 @@ const ProfleDetails = () => {
           // selectedIndex={selectedIndex}
           // onChange={setSelectedIndex}
         >
-          <Tab.List className=" flex gap-3 w-2/3   md:ml-72 ml-20 mt-10 ">
+          <Tab.List className=" flex gap-3 w-2/3   lg:ml-72  md:ml-28 sm:ml-28  ml-12 mt-10 ">
             <Tab as={Fragment}>
               {({ selected }) => (
                 /* Use the `selected` state to conditionally style the selected tab. */
@@ -46,9 +46,9 @@ const ProfleDetails = () => {
               )}
             </Tab>
           </Tab.List>
-          <hr className=" h-px bg-gray-200 border-0 dark:bg-gray-700 w-2/3  ml-72 " />
+          <hr className=" h-px bg-gray-200 border-0 dark:bg-gray-700 lg:w-2/3 w-4/5 lg:ml-72  md:ml-28 sm:ml-28  ml-10 " />
 
-          <Tab.Panels className=" md:w-2/3   sm:w-3/4     md:ml-56  ml-14  ">
+          <Tab.Panels className="    lg:w-2/3  md:w-4/5 sm:w-full    lg:ml-60  md:ml-20  ml-10">
             <Tab.Panel>
               <Articles query={`?author=${username}&`} url="/" />
             </Tab.Panel>

@@ -22,6 +22,7 @@ class AuthStore {
       token: observable,
       error: observable,
       postLogInUsers: action,
+      postSignUpUsers: action,
     });
   }
 
@@ -40,16 +41,16 @@ class AuthStore {
       });
       return response;
     } catch (error: any) {
-      if (
-        error.response?.data.errors.username &&
-        error.response.data.errors.email
-      ) {
-        this.error = "username and email have already been taken ";
-      } else if (error.response.data.errors.email) {
-        this.error = "email has already been taken ";
-      } else if (error.response.data.errors.username) {
-        this.error = "username has already been taken ";
-      }
+      // if (
+      //   error.response?.data.errors.username &&
+      //   error.response.data.errors.email
+      // ) {
+      //   this.error = "username and email have already been taken ";
+      // } else if (error.response.data.errors.email) {
+      //   this.error = "email has already been taken ";
+      // } else if (error.response.data.errors.username) {
+      //   this.error = "username has already been taken ";
+      // }
 
       return error;
     }
@@ -71,8 +72,7 @@ class AuthStore {
 
       return data;
     } catch (err: any) {
-      console.log(err);
-      this.error = err.response.data.errors["email or password"][0];
+      // this.error = err.response.data.errors["email or password"][0];
       return err;
     }
   }

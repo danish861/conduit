@@ -50,7 +50,7 @@ const Comments = () => {
     <>
       <Formik
         initialValues={{ message: "" }}
-        onSubmit={async (values: FormValues) => {
+        onSubmit={(values: FormValues, { setSubmitting, resetForm }) => {
           // submit the form
 
           postComments(`articles/${slug}/comments`, {
@@ -60,9 +60,11 @@ const Comments = () => {
           })
             .then((data) => setCommentsData([data.comment, ...commentsData]))
             .catch((error) => console.log(error));
+          resetForm();
+          setSubmitting(false);
         }}
       >
-        {() => (
+        {({ isSubmitting }) => (
           <Form>
             <div className="border">
               <Field
@@ -80,6 +82,7 @@ const Comments = () => {
                 <button
                   type="submit"
                   className="btn bg-green text-sm  hover:bg-emerald-600 py-1 px-3 rounded  text-white font-bold  float-right  "
+                  disabled={isSubmitting}
                 >
                   Post Commnet
                 </button>

@@ -1,13 +1,10 @@
 import React from "react";
 import UserDetails from "../UserInfo/UserDetails";
-import { AiOutlinePlus } from "react-icons/ai";
-import { HiHeart } from "react-icons/hi";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import ArticlTag from "../Tags/ArticlTag";
 import Link from "next/link";
 import FollowButton from "../common/FollowButton";
-import FavouriteButton from "../common/FavouriteButton";
 import Comments from "./Comments";
 import authStore from "../../store/AuthStore";
 import { useRouter } from "next/router";
@@ -87,11 +84,6 @@ const ArticleDetails = ({
                   />
                 </>
               )}
-
-              {/* <FavouriteButton
-                favoritesCount={favoritesCount}
-                slug={author.username}
-              /> */}
             </div>
           </div>
         </div>
@@ -99,7 +91,7 @@ const ArticleDetails = ({
       <div className="mx-9  lg:mx-40 p-7 ">
         <p className="leading-7 text-lg mb-5">{body}</p>
         <ul className="flex">
-          {tagList.map((tag) => {
+          {tagList?.map((tag) => {
             return <ArticlTag tag={tag} key={tag} />;
           })}
         </ul>
@@ -108,7 +100,7 @@ const ArticleDetails = ({
         <div className=" flex items-center gap-5 ml-8 sm:ml-28 lg:ml-96">
           <UserDetails author={author} updatedAt={updatedAt} />
 
-          <div className="flex ">
+          <div className="flex md:flex-row xs:flex-col xs:gap-1  md:gap-0">
             {authStore.username === username ? (
               <>
                 <button

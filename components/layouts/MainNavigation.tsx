@@ -21,7 +21,7 @@ const MainNavigation = observer((props: any) => {
 
   return (
     <>
-      <header className="flex flex-col xs:flex-row items-center justify-between mx-9  lg:mx-48 p-2   ">
+      <header className="flex flex-col sm:flex-row items-center justify-between mx-9  lg:mx-48 p-4">
         <div className="flex gap-7">
           <Link
             href="/"
@@ -32,7 +32,7 @@ const MainNavigation = observer((props: any) => {
         </div>
 
         <nav>
-          <ul className="flex items-center gap-4 ">
+          <ul className="flex items-center  gap-4 ">
             <li>
               <DialogCmponent />
             </li>

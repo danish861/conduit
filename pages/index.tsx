@@ -1,8 +1,9 @@
 import React, { Fragment } from "react";
 import Articles from "../components/Airticle/Articles";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Tab } from "@headlessui/react";
 import PopularTag from "../components/Tags/PopularTag";
+import { FiHash } from "react-icons/fi";
 
 import authStore from "../store/AuthStore";
 import { observer } from "mobx-react-lite";
@@ -49,13 +50,13 @@ const HomePage = () => {
       </div>
 
       <div className=" flex md:flex-row flex-col  gap-2 lg:mx-48  mx-11 my-10  ">
-        <div className=" md:w-10/12 w-full  ">
+        <div className=" md:w-10/12 w-full   ">
           <Tab.Group
             defaultIndex={selectedIndex}
             selectedIndex={selectedIndex}
             onChange={setSelectedIndex}
           >
-            <Tab.List className=" ml-10 flex gap-5">
+            <Tab.List className=" md:ml-10  sm:ml-16 flex gap-5">
               {authStore.isLoggedIn ? (
                 <Tab as={Fragment}>
                   {({ selected }) => (
@@ -94,13 +95,15 @@ const HomePage = () => {
                           : " text-gray-500  dark:text-gray-200 "
                       }
                     >
-                      {tagName}
+                      <div className="flex items-center gap-1">
+                        <FiHash fontSize={20} /> {tagName}
+                      </div>
                     </button>
                   )}
                 </Tab>
               )}
             </Tab.List>
-            <hr className="h-px bg-gray-200 border-0 dark:bg-gray-700 ml-10" />
+            <hr className="h-px bg-gray-200 border-0 dark:bg-gray-700 md:ml-10 sm:ml-16 " />
             <Tab.Panels>
               {authStore.isLoggedIn ? (
                 <Tab.Panel>

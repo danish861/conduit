@@ -1,19 +1,14 @@
-import React, { useMemo, memo } from "react";
 import Link from "next/link";
-import { CiHeart } from "react-icons/ci";
-import { HiHeart } from "react-icons/hi";
 import Pagination from "../Pagination";
 import ArticlTag from "../Tags/ArticlTag";
 import UserDetails from "../UserInfo/UserDetails";
 
 import useSWR from "swr";
 import { getArticleData } from "../../APIs/article";
-import { useEffect, useState } from "react";
-import authStore from "../../store/AuthStore";
+import { useState } from "react";
 import FavouriteButton from "../common/FavouriteButton";
 import { ColorRing } from "react-loader-spinner";
 import { useRouter } from "next/router";
-import { Hash } from "crypto";
 
 interface ArticlesProps {
   query: string;
@@ -34,7 +29,6 @@ interface Article {
 }
 
 const Articles = ({ query, url }: ArticlesProps) => {
-  const router = useRouter();
   const [offset, setOffset] = useState(1);
   const [selectedPage, setCurrentPage] = useState(1);
 
@@ -62,7 +56,7 @@ const Articles = ({ query, url }: ArticlesProps) => {
   return (
     <>
       <div className="flex flex-col items-center gap-4 mb-10  ">
-        <div className="flex flex-col  justify-center md:w-11/12 ">
+        <div className="flex flex-col  justify-center md:w-11/12  sm:w-4/5 ">
           {articles.map((data) => {
             return (
               <>
@@ -128,4 +122,4 @@ const Articles = ({ query, url }: ArticlesProps) => {
   );
 };
 
-export default memo(Articles);
+export default Articles;

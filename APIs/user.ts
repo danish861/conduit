@@ -10,10 +10,9 @@ interface userProps {
 
 // post sign-up users
 
-export const postUser = (url: string, body: { user: userProps }) => {
-  // console.log(body);
-  return POST(url, body);
-};
+export const postUser = (url: string, body: { user: userProps }) =>
+  POST(url, body);
+// console.log(body);
 
 // get the USERDATA
 

@@ -47,7 +47,7 @@ const ProfileInfo = () => {
             {" "}
             {username}{" "}
           </p>
-          <p>{bio}</p>
+          <p className="text-gray-400"> {bio}</p>
         </div>
 
         {authStore.username === username ? (

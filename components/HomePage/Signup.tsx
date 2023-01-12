@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Formik, Field, Form, FormikHelpers } from "formik";
 import { observer } from "mobx-react";
 
@@ -13,8 +14,9 @@ interface MyFormValues {
 }
 
 const Signup = observer(() => {
+  const [err, setErr] = useState("");
   const router = useRouter();
-  const err = authStore.error;
+
   return (
     <>
       <div className="text-center  m-4  ">
@@ -38,11 +40,23 @@ const Signup = observer(() => {
                 password: values.password,
               },
             })
-            .then((response) => {
-              if (response.user) {
+            .then((data) => {
+              if (data.user) {
                 router.push("/");
               }
-            });
+
+              if (
+                data.response?.data.errors.username &&
+                data.response.data.errors.email
+              ) {
+                setErr("username and email have already been taken ");
+              } else if (data.response.data.errors.email) {
+                setErr("email has already been taken ");
+              } else if (data.response.data.errors.username) {
+                setErr("username has already been taken ");
+              }
+            })
+            .catch((error) => console.log(error));
         }}
       >
         {({ isSubmitting }) => (

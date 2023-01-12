@@ -21,19 +21,19 @@ import { useRouter } from "next/router";
 export default function App({ Component, pageProps, stores }: MyAppProps) {
   const router = useRouter();
 
-  useEffect(() => {
-    function handleHashChange() {
-      const currentHash = window.location.hash.slice(1);
-      router.push("/", "", { shallow: true });
-      router.replace(`/${currentHash}`, `/${currentHash}`, { shallow: true });
-    }
+  // useEffect(() => {
+  //   function handleHashChange() {
+  //     const currentHash = window.location.hash.slice(1);
+  //     router.push("/", "", { shallow: true });
+  //     router.replace(`/${currentHash}`, `/${currentHash}`, { shallow: true });
+  //   }
 
-    window.addEventListener("hashchange", handleHashChange);
+  //   window.addEventListener("hashchange", handleHashChange);
 
-    return () => {
-      window.removeEventListener("hashchange", handleHashChange);
-    };
-  }, [router.events]);
+  //   return () => {
+  //     window.removeEventListener("hashchange", handleHashChange);
+  //   };
+  // }, [router.events]);
 
   const hydrate = create();
   typeof window === "undefined"

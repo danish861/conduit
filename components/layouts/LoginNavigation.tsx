@@ -5,6 +5,8 @@ import React from "react";
 import Link from "next/link";
 import AuthStore from "../../store/AuthStore";
 import authStore from "../../store/AuthStore";
+import { FiSettings } from "react-icons/fi";
+import { BiEdit } from "react-icons/bi";
 
 const LogInNavigation = () => {
   const router = useRouter();
@@ -17,7 +19,11 @@ const LogInNavigation = () => {
           currentRoute == "/editor" ? classes.active : classes.nonActive
         }
       >
-        <Link href="/editor"> New Article</Link>
+        <Link href="/editor">
+          <div className="flex items-center gap-1 ">
+            <BiEdit /> New Article
+          </div>
+        </Link>
       </li>
 
       <li
@@ -25,7 +31,11 @@ const LogInNavigation = () => {
           currentRoute == "/settings" ? classes.active : classes.nonActive
         }
       >
-        <Link href="/settings"> Setting</Link>
+        <Link href="/settings">
+          <div className="flex items-center gap-1 ">
+            <FiSettings /> Setting
+          </div>
+        </Link>
       </li>
 
       <li
@@ -46,7 +56,7 @@ const LogInNavigation = () => {
             <img
               src={AuthStore.image}
               alt="user_image"
-              className="w-6  h-6 rounded-full"
+              className="w-5  h-5 rounded-full"
             />
             <p> {authStore.username}</p>
           </div>

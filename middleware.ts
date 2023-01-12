@@ -14,4 +14,11 @@ export function middleware(req: NextRequest, res: NextResponse) {
   if (!verify && url.includes("/editor")) {
     return NextResponse.redirect("http://localhost:3000/");
   }
+  if (verify && url.includes("/login")) {
+    return NextResponse.redirect("http://localhost:3000/");
+  }
+
+  if (verify && url.includes("/register")) {
+    return NextResponse.redirect("http://localhost:3000/");
+  }
 }

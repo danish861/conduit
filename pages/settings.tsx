@@ -44,6 +44,8 @@ const SettingsPage = () => {
   }
   const user = data.user;
 
+  console.log(typeof user.username);
+
   // useEffect(() => {
   //   const userData = async () => {
   //     const { user } = await getUser("/user");
@@ -61,10 +63,10 @@ const SettingsPage = () => {
       <Formik
         enableReinitialize={true}
         initialValues={{
-          image: `${user.image}`,
-          username: `${user.username}`,
-          bio: `${user.bio}` ? `${user.bio}` : "",
-          email: `${user.email}`,
+          image: user.image,
+          username: user.username,
+          bio: user?.bio,
+          email: user.email,
           password: "",
           action: "",
         }}
