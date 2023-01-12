@@ -92,7 +92,7 @@ const ArticleDetails = ({
         <p className="leading-7 text-lg mb-5">{body}</p>
         <ul className="flex">
           {tagList?.map((tag) => {
-            return <ArticlTag tag={tag} key={tag} />;
+            return <ArticlTag tag={tag} />;
           })}
         </ul>
         <hr className="my-8 h-px bg-gray-200 border-0 dark:bg-gray-700" />
