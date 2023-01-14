@@ -34,7 +34,6 @@ class AuthStore {
       this.username = response.user.username;
       this.image = response.user.image;
       const tokenValue = response.user.token;
-      localStorage.setItem("token", tokenValue);
       this.token = tokenValue;
       setCookie("authToken", response.user.token, {
         maxAge: 30 * 24 * 60 * 60,

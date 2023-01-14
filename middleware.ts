@@ -21,4 +21,6 @@ export function middleware(req: NextRequest, res: NextResponse) {
   if (verify && url.includes("/register")) {
     return NextResponse.redirect("http://localhost:3000/");
   }
+
+  // to handle
 }

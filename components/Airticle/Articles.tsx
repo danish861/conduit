@@ -2,13 +2,15 @@ import Link from "next/link";
 import Pagination from "../Pagination";
 import ArticlTag from "../Tags/ArticlTag";
 import UserDetails from "../UserInfo/UserDetails";
-
+import { useEffect } from "react";
 import useSWR from "swr";
 import { getArticleData } from "../../APIs/article";
 import { useState } from "react";
 import FavouriteButton from "../common/FavouriteButton";
 import { ColorRing } from "react-loader-spinner";
-import { useRouter } from "next/router";
+import Router from "next/router";
+import { deleteCookie, getCookie } from "cookies-next";
+import authStore from "../../store/AuthStore";
 
 interface ArticlesProps {
   query: string;
@@ -38,11 +40,23 @@ const Articles = ({ query, url }: ArticlesProps) => {
     getArticleData(url)
   );
 
+  const token = getCookie("authToken");
+
+  if (authStore.isLoggedIn) {
+    if (token !== authStore.token) {
+      deleteCookie("authToken");
+      authStore.token = "";
+      authStore.isLoggedIn = false;
+      Router.push("/");
+    }
+  }
+
   if (isLoading) return <ColorRing />;
 
   const { articles: articlesData, articlesCount } = data;
 
   const articles: Article[] = articlesData;
+  console.log(articles);
 
   if (articles.length === 0) {
     return <div className="m-8">No article are here... yet.</div>;

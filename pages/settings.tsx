@@ -100,7 +100,6 @@ const SettingsPage = () => {
           /////////////////////////////
 
           if (values.action === "logout") {
-            console.log("logout button clicked");
             localStorage.removeItem("token");
             authStore.isLoggedIn = false;
             deleteCookie("authToken");
