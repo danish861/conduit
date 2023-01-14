@@ -1,12 +1,14 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import useSWR from "swr";
-import { getComments, postComments } from "../../APIs/article";
+import { deleteComment, getComments, postComments } from "../../APIs/article";
 
 import { Formik, Form, Field } from "formik";
 import authStore from "../../store/AuthStore";
 import moment from "moment";
 import Link from "next/link";
+
+import { RiDeleteBin5Line } from "react-icons/ri";
+import { colors } from "@mui/joy";
 
 interface FormValues {
   message: string;
@@ -28,6 +30,7 @@ const Comments = () => {
 
   const [commentsData, setCommentsData] = useState<IComments[]>([]);
 
+  // console.log(commentsData);
   // previously done in this way
   // const { data, error } = useSWR(
   //   slug ? `articles/${slug}/comments` : null,
@@ -45,6 +48,12 @@ const Comments = () => {
 
     comments();
   }, [slug]);
+
+  const deleteHandler = async (id: number) => {
+    // console.log(id);
+    await deleteComment(`/articles/${slug}/comments/${id}`);
+    setCommentsData(commentsData.filter((comments) => comments.id !== id));
+  };
 
   return (
     <>
@@ -99,20 +108,32 @@ const Comments = () => {
               <div>
                 <p className="p-5">{comment.body}</p>
               </div>
-              <div className=" bg-gray-100 border-y-0 p-3  flex gap-2  ">
-                <img
-                  src={comment.author.image}
-                  alt="user_image"
-                  className="  rounded-full w-6 h-6 "
-                />
-                <Link href={`/${comment.author.username}`}>
-                  <p className="text-green text-sm hover:underline">
-                    {comment.author.username}
-                  </p>
-                </Link>
-                <span className="text-slate-300 text-sm">
-                  {moment(comment.updatedAt).format("MMMM D, YYYY")}
-                </span>
+              <div className="flex justify-between  border-t  p-3  bg-gray-100 items-center ">
+                <div className="flex gap-2  ">
+                  <img
+                    src={comment.author.image}
+                    alt="user_image"
+                    className="  rounded-full w-6 h-6 "
+                  />
+                  <Link href={`/${comment.author.username}`}>
+                    <p className="text-green text-sm hover:underline">
+                      {comment.author.username}
+                    </p>
+                  </Link>
+                  <span className="text-slate-300 text-sm">
+                    {moment(comment.updatedAt).format("MMMM D, YYYY")}
+                  </span>
+                </div>
+
+                {comment.author.username === authStore.username ? (
+                  <button
+                    className="mr-4"
+                    onClick={() => deleteHandler(comment.id)}
+                  >
+                    {" "}
+                    <RiDeleteBin5Line className="  text-gray-600  hover:text-gray-900" />
+                  </button>
+                ) : null}
               </div>
             </div>
           </>

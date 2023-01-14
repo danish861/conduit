@@ -42,6 +42,10 @@ export const postArticle = (url: string, body: { article: postProps }) => {
 
 export const deleteArticle = (url: string) => DELETE(url);
 
+// delete the comments
+
+export const deleteComment = (url: string) => DELETE(url);
+
 // upade the article
 
 interface updateProps {

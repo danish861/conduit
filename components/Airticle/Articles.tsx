@@ -12,7 +12,6 @@ import Router, { useRouter } from "next/router";
 import { deleteCookie, getCookie } from "cookies-next";
 import authStore from "../../store/AuthStore";
 import { toast } from "react-toastify";
-import clearCache from "swr";
 
 interface ArticlesProps {
   query: string;
@@ -48,7 +47,7 @@ const Articles = ({ query, url }: ArticlesProps) => {
         authStore.isLoggedIn = false;
         authStore.username = "";
         authStore.image = "";
-        router.push("/");
+        Router.push("/register");
         toast.error("Unauthorized token!");
       }
     }
@@ -58,6 +57,14 @@ const Articles = ({ query, url }: ArticlesProps) => {
   const { data, error, isLoading } = useSWR(`articles/${queryString}`, (url) =>
     getArticleData(url)
   );
+
+  if (!data) {
+    return <div>Loading</div>;
+  }
+
+  if (error) {
+    console.log(error);
+  }
 
   console.log(error);
 

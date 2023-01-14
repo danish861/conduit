@@ -38,14 +38,16 @@ const HomePage = () => {
         />
       </Head>
 
-      <div className="bg-green flex flex-col  items-center p-10 gap-3">
-        <h1 className="font-Titillium  text-5xl font-bold text-zinc-100">
-          conduit
-        </h1>
-        <p className="text-zinc-100  text-xl">
-          A place to share your knowledge
-        </p>
-      </div>
+      {authStore.isLoggedIn ? null : (
+        <div className="bg-green flex flex-col  items-center p-10 gap-3">
+          <h1 className="font-Titillium  text-5xl font-bold text-zinc-100">
+            conduit
+          </h1>
+          <p className="text-zinc-100  text-xl">
+            A place to share your knowledge
+          </p>
+        </div>
+      )}
 
       <div className=" flex md:flex-row flex-col  gap-2 lg:mx-48  mx-11 my-10  ">
         <div className=" md:w-10/12 w-full   ">
