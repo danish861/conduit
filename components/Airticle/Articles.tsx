@@ -112,8 +112,8 @@ const Articles = ({ query, url }: ArticlesProps) => {
                       Read more...
                     </Link>
                     <ul className="flex justify-end mb-5">
-                      {data.tagList.map((tag, index) => (
-                        <Link href={`article/${data.slug}`} key={index}>
+                      {data.tagList.map((tag) => (
+                        <Link href={`article/${data.slug}`}>
                           <ArticlTag tag={tag} />
                         </Link>
                       ))}
