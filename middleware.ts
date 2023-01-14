@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import authStore from "./store/AuthStore";
 
 export function middleware(req: NextRequest, res: NextResponse) {
   const verify = req.cookies.get("authToken")?.value;
@@ -23,4 +24,6 @@ export function middleware(req: NextRequest, res: NextResponse) {
   }
 
   // to handle
+
+  console.log(authStore.isLoggedIn);
 }

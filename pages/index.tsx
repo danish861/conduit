@@ -8,13 +8,11 @@ import { FiHash } from "react-icons/fi";
 import authStore from "../store/AuthStore";
 import { observer } from "mobx-react-lite";
 import Head from "next/head";
-import { Router, useRouter } from "next/router";
 
 const HomePage = () => {
   const [tagName, setTagName] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const router = useRouter();
   // const hash = router.asPath.split("#")[1] || "";
   // const showModal = hash === "modal1" ? true : false;
 

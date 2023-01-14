@@ -5,7 +5,8 @@ import "../mobx-config";
 import NextNProgress from "nextjs-progressbar";
 import { Provider } from "mobx-react";
 import authStore from "../store/AuthStore";
-import { useEffect } from "react";
+import "react-toastify/dist/ReactToastify.css";
+import { toast, ToastContainer } from "react-toastify";
 
 type MyAppProps = {
   Component: React.ComponentType;
@@ -17,6 +18,7 @@ import { create } from "mobx-persist";
 import { ThemeProvider } from "next-themes";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { deleteCookie, getCookie } from "cookies-next";
 
 export default function App({ Component, pageProps, stores }: MyAppProps) {
   const router = useRouter();
@@ -57,6 +59,7 @@ export default function App({ Component, pageProps, stores }: MyAppProps) {
               height={2}
             />
             <Component {...pageProps} />
+            <ToastContainer />
           </Layout>
         </ThemeProvider>
       </Provider>

@@ -39,6 +39,11 @@ const SettingsPage = () => {
 
   const { data, error: err } = useSWR("/user", (url) => getUser(url));
 
+  console.log(
+    "errrorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
+    err
+  );
+
   if (!data) {
     return;
   }
@@ -93,6 +98,11 @@ const SettingsPage = () => {
               })
               .catch((error) => {
                 setError(error.response.data);
+                localStorage.removeItem("token");
+                authStore.token = "";
+                authStore.isLoggedIn = false;
+                authStore.username = "";
+                authStore.image = "";
                 console.log(error.response.data);
               });
           }
@@ -102,6 +112,9 @@ const SettingsPage = () => {
           if (values.action === "logout") {
             localStorage.removeItem("token");
             authStore.isLoggedIn = false;
+            authStore.token = "";
+            authStore.username = "";
+            authStore.image = "";
             deleteCookie("authToken");
             router.push("/");
           }
