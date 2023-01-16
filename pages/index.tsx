@@ -85,7 +85,9 @@ const HomePage = () => {
                   </button>
                 )}
               </Tab>
-              {(selectedIndex === 2 || selectedIndex === 1) && (
+              {(authStore.isLoggedIn
+                ? selectedIndex === 2
+                : selectedIndex === 1) && (
                 <Tab as={Fragment}>
                   {({ selected }) => (
                     <button
