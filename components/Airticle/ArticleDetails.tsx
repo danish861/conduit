@@ -136,21 +136,9 @@ const ArticleDetails = ({
             )}
           </div>
         </div>
+
         <div className=" xl:px-48 lg:px-28  sm:px-10 py-10">
-          {authStore.isLoggedIn ? (
-            <Comments />
-          ) : (
-            <p>
-              <Link href="/login" className="text-green hover:underline">
-                sign in
-              </Link>{" "}
-              or{" "}
-              <Link href="/register" className="text-green hover:underline">
-                sign up
-              </Link>{" "}
-              to add comments on this article.
-            </p>
-          )}
+          <Comments />
         </div>
       </div>
     </>

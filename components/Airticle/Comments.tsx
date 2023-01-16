@@ -57,49 +57,63 @@ const Comments = () => {
 
   return (
     <>
-      <Formik
-        initialValues={{ message: "" }}
-        onSubmit={(values: FormValues, { setSubmitting, resetForm }) => {
-          // submit the form
+      {authStore.isLoggedIn ? (
+        <Formik
+          initialValues={{ message: "" }}
+          onSubmit={(values: FormValues, { setSubmitting, resetForm }) => {
+            // submit the form
 
-          postComments(`articles/${slug}/comments`, {
-            comment: {
-              body: values.message,
-            },
-          })
-            .then((data) => setCommentsData([data.comment, ...commentsData]))
-            .catch((error) => console.log(error));
-          resetForm();
-          setSubmitting(false);
-        }}
-      >
-        {({ isSubmitting }) => (
-          <Form>
-            <div className="border">
-              <Field
-                name="message"
-                component="textarea"
-                placeholder="Write a comments..."
-                className=" block w-full h-32 p-3 outline-none  rounded-md "
-              />
-              <div className="flex justify-between  border-t  p-3  bg-gray-100 items-center ">
-                <img
-                  src={authStore.image}
-                  alt="user_image"
-                  className="  rounded-full w-6 h-6 "
+            postComments(`articles/${slug}/comments`, {
+              comment: {
+                body: values.message,
+              },
+            })
+              .then((data) => setCommentsData([data.comment, ...commentsData]))
+              .catch((error) => console.log(error));
+            resetForm();
+            setSubmitting(false);
+          }}
+        >
+          {({ isSubmitting }) => (
+            <Form>
+              <div className="border">
+                <Field
+                  name="message"
+                  component="textarea"
+                  placeholder="Write a comments..."
+                  className=" block w-full h-32 p-3 outline-none  rounded-md "
                 />
-                <button
-                  type="submit"
-                  className="btn bg-green text-sm  hover:bg-emerald-600 py-1 px-3 rounded  text-white font-bold  float-right  "
-                  disabled={isSubmitting}
-                >
-                  Post Commnet
-                </button>
+                <div className="flex justify-between  border-t  p-3  bg-gray-100 items-center ">
+                  <img
+                    src={authStore.image}
+                    alt="user_image"
+                    className="  rounded-full w-6 h-6 "
+                  />
+                  <button
+                    type="submit"
+                    className="btn bg-green text-sm  hover:bg-emerald-600 py-1 px-3 rounded  text-white font-bold  float-right  "
+                    disabled={isSubmitting}
+                  >
+                    Post Commnet
+                  </button>
+                </div>
               </div>
-            </div>
-          </Form>
-        )}
-      </Formik>
+            </Form>
+          )}
+        </Formik>
+      ) : (
+        <p>
+          {" "}
+          <Link href="/login" className="text-green hover:underline">
+            sign in
+          </Link>{" "}
+          or{" "}
+          <Link href="/register" className="text-green hover:underline">
+            sign up
+          </Link>{" "}
+          to add comments on this article.
+        </p>
+      )}
 
       {commentsData?.map((comment) => {
         return (

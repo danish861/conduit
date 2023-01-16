@@ -9,6 +9,8 @@ interface fetchDataProps {
   body?: {};
 }
 
+//   {[key: string]: any}
+
 const fetchData = async ({ method, url, body }: fetchDataProps) => {
   const token = getCookie("authToken");
   try {
