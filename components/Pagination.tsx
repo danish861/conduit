@@ -23,7 +23,7 @@ const Pagination = ({
         className="rounded-sm  mt-10 p-4"
       >
         <ul className=" flex flex-wrap -space-x-px rounded-sm">
-          {pageNumber.map((num) => {
+          {pageNumber.map((num, index) => {
             return (
               <li className="flex" key={num}>
                 <Link
@@ -32,7 +32,9 @@ const Pagination = ({
                     selectedPage === num
                       ? "text-gray-200 hover:bg-green hover:text-gray-100 bg-lime-500"
                       : ""
-                  } `}
+                  }   ${index === 0 ? "rounded-l-md" : ""}   ${
+                    index === pageNumber.length - 1 ? "rounded-r-md" : ""
+                  }       `}
                   onClick={() => pageHandler(num)}
                 >
                   {num}
