@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Tab } from "@headlessui/react";
 import Articles from "../Airticle/Articles";
 import Router, { useRouter } from "next/router";
@@ -7,21 +7,26 @@ import Link from "next/link";
 import ProfileInfo from "./ProfileInfo";
 import { tabClasses } from "@mui/joy";
 import authStore from "../../store/AuthStore";
+import { AppContext } from "../../pages/_app";
 
 const ProfleDetails = () => {
   // const [selectedIndex, setSelectedIndex] = useState(0);
-  const [currentTab, setCurrentTab] = useState(0);
+  // const [currentTab, setCurrentTab] = useState(0);
+  const { currentTab, setCurrentTab } = useContext(AppContext);
+
   const router = useRouter();
   const { username } = router.query;
 
-  console.log("username form profile details page ", router);
+  console.log("===============  CURRENT TAB=========", currentTab);
+
+  // console.log("username form profile details page ", router);
 
   // console.log("current tab outside of the useEffect", currentTab);
 
-  useEffect(() => {
-    setCurrentTab(0);
-  }, [router.route]);
-  // console.log(username);
+  // useEffect(() => {
+  //   setCurrentTab(0);
+  // }, [router.route]);
+  // // console.log(username);
 
   return (
     <>

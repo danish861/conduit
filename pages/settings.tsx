@@ -89,11 +89,13 @@ const SettingsPage = () => {
             })
               .then((data) => {
                 if (data.user) {
+                  console.log(data.user.token);
                   authStore.username = data.user.username;
                   router.push(`/${data.user.username}`);
-                  setCookie("authToken", user.token, {
-                    maxAge: 30 * 24 * 60 * 60,
-                  });
+                  // localStorage.setItem("token", data.user.token);
+                  // setCookie("authToken", data.user.token, {
+                  //   maxAge: 30 * 24 * 60 * 60,
+                  // });
                 }
               })
               .catch((error) => {

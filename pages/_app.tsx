@@ -18,10 +18,24 @@ import { create } from "mobx-persist";
 import { ThemeProvider } from "next-themes";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { deleteCookie, getCookie } from "cookies-next";
+import { createContext, useState } from "react";
+
+export interface AppContextProps {
+  currentTab: number;
+  setCurrentTab: (tab: number) => void;
+}
+
+export const AppContext = createContext<AppContextProps>({
+  currentTab: 0,
+  setCurrentTab: () => {},
+});
 
 export default function App({ Component, pageProps, stores }: MyAppProps) {
   const router = useRouter();
+
+  const isFabSelected = router.asPath.includes("/favorites");
+
+  const [currentTab, setCurrentTab] = useState(isFabSelected ? 1 : 0);
 
   // useEffect(() => {
   //   function handleHashChange() {
@@ -50,19 +64,21 @@ export default function App({ Component, pageProps, stores }: MyAppProps) {
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0"
         />
       </Head>
-      <Provider {...stores}>
-        <ThemeProvider attribute="class">
-          <Layout>
-            <NextNProgress
-              options={{ showSpinner: false }}
-              color="#5cb85c"
-              height={2}
-            />
-            <Component {...pageProps} />
-            <ToastContainer />
-          </Layout>
-        </ThemeProvider>
-      </Provider>
+      <AppContext.Provider value={{ currentTab, setCurrentTab }}>
+        <Provider {...stores}>
+          <ThemeProvider attribute="class">
+            <Layout>
+              <NextNProgress
+                options={{ showSpinner: false }}
+                color="#5cb85c"
+                height={2}
+              />
+              <Component {...pageProps} />
+              <ToastContainer />
+            </Layout>
+          </ThemeProvider>
+        </Provider>
+      </AppContext.Provider>
     </>
   );
 }

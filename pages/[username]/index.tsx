@@ -3,6 +3,8 @@ import ProfileInfo from "../../components/Profile/ProfileInfo";
 import Head from "next/head";
 
 import ProfleDetails from "../../components/Profile/ProfleDetails";
+import { useContext, useState } from "react";
+import { AppContext } from "../_app";
 
 // import ProfleDetails from "../../components/Profile/ProfleDetails";
 
@@ -10,6 +12,9 @@ const ProfilePage = () => {
   const router = useRouter();
   const { query, asPath } = useRouter();
   const username = query.username;
+
+  // const { currentTab, setCurrentTab } = useContext(AppContext);
+  // const [currentTab, setCurrentTab] = useState(0);
 
   return (
     <>

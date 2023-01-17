@@ -35,6 +35,7 @@ const Articles = ({ query }: ArticlesProps) => {
   const [offset, setOffset] = useState(1);
   const [selectedPage, setCurrentPage] = useState(1);
 
+  console.log("=================CHECK PATH AT ARTICLE PAGE", router);
   const token = getCookie("authToken");
 
   useEffect(() => {
@@ -106,6 +107,7 @@ const Articles = ({ query }: ArticlesProps) => {
                     <Link
                       href={{
                         pathname: `article/${data.slug}`,
+
                         // hash: "/",
                       }}
                       className="text-2xl font-source-sans-pro font-semibold text-gray-700  dark:text-gray-300"
@@ -122,6 +124,7 @@ const Articles = ({ query }: ArticlesProps) => {
                   <div className="flex justify-between   mt-4">
                     <Link
                       href={`article/${data.slug}`}
+                      as={`article/${data.slug}`}
                       className="text-gray-400   dark:text-gray-600  text-sm"
                     >
                       Read more...
@@ -129,13 +132,17 @@ const Articles = ({ query }: ArticlesProps) => {
                     <ul className="flex justify-end mb-5">
                       {data.tagList.map((tag, index) => (
                         // href={`article/${data.slug}`}
-                        <Link
-                          href={`article/${data.slug}`}
-                          // onClick={() => router.replace(`article/${data.slug}`)}
+                        <button
+                          // href={`article/${data.slug}`}
+                          onClick={() =>
+                            router.replace({
+                              pathname: `article/${data.slug}`,
+                            })
+                          }
                           key={index}
                         >
                           <ArticlTag tag={tag} />
-                        </Link>
+                        </button>
                       ))}
                     </ul>
                   </div>

@@ -105,7 +105,7 @@ const HomePage = () => {
                 </Tab>
               )}
             </Tab.List>
-            <hr className=" h-px bg-gray-100 border-0 dark:bg-gray-700    md:ml-10  sm:ml-16 gap-2" />
+            <hr className=" h-px bg-gray-100 border-0 dark:bg-gray-700   md:ml-10  sm:ml-16 gap-2" />
 
             <Tab.Panels>
               {authStore.isLoggedIn ? (

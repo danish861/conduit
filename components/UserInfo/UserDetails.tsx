@@ -1,7 +1,8 @@
 import Link from "next/link";
 import moment from "moment";
-import React from "react";
+import React, { useContext } from "react";
 import { useRouter } from "next/router";
+import { AppContext, AppContextProps } from "../../pages/_app";
 
 interface IUserDetailsProps {
   author: {
@@ -12,18 +13,30 @@ interface IUserDetailsProps {
   color?: string;
 }
 
+// interface AppContextType {
+//   currentTab: number;
+//   setCurrentTab: () => void;
+// }
+
 const UserDetails = ({ author, updatedAt, color }: IUserDetailsProps) => {
   const router = useRouter();
+
+  const { currentTab, setCurrentTab } = useContext(AppContext);
+
+  const redirectToProfilePage = () => {
+    router.push(`/${author.username}`);
+    setCurrentTab(0);
+  };
   return (
     <>
       <div className="flex  gap-2  items-center">
-        <button onClick={() => router.push(`/${author.username}`)}>
+        <button onClick={redirectToProfilePage}>
           <img src={author.image} alt="img" className="rounded-full w-8 h-8" />
         </button>
         <div className=" inline-block">
           <button
             // href={`${author.username}`}
-            onClick={() => router.push(`/${author.username}`)}
+            onClick={redirectToProfilePage}
             className={`-m-1 ml-0.5 block  text-green hover:underline items-start`}
             style={{ color: color }}
           >
