@@ -9,9 +9,10 @@ interface IUserDetailsProps {
     image: string;
   };
   updatedAt: number;
+  color?: string;
 }
 
-const UserDetails = ({ author, updatedAt }: IUserDetailsProps) => {
+const UserDetails = ({ author, updatedAt, color }: IUserDetailsProps) => {
   const router = useRouter();
   return (
     <>
@@ -24,6 +25,7 @@ const UserDetails = ({ author, updatedAt }: IUserDetailsProps) => {
             // href={`${author.username}`}
             onClick={() => router.push(`/${author.username}`)}
             className={`-m-1 ml-0.5 block  text-green hover:underline items-start`}
+            style={{ color: color }}
           >
             {author.username}
           </button>

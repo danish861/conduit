@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { followUser, getProfile, unFollowUser } from "../../APIs/profile";
 import FollowButton from "../common/FollowButton";
 import Link from "next/link";
-import ProfleDetails from "./ProfleDetails";
+// import ProfleDetails from "./ProfleDetails";
 
 interface IProfileInfo {
   profile: {
@@ -23,6 +23,7 @@ const ProfileInfo = () => {
   const { query, isReady } = useRouter();
 
   const user = query.username;
+
   const { data, error } = useSWR<IProfileInfo>(
     user ? `profiles/${user}` : null,
     user ? (url) => getProfile(url) : null
@@ -65,7 +66,7 @@ const ProfileInfo = () => {
           </div>
         )}
       </div>
-      <ProfleDetails />
+      {/* <ProfleDetails /> */}
     </>
   );
 };

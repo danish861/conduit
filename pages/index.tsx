@@ -49,14 +49,14 @@ const HomePage = () => {
         </div>
       )}
 
-      <div className=" flex md:flex-row flex-col  gap-2 lg:mx-48  mx-11 my-10  ">
-        <div className=" md:w-10/12 w-full   ">
+      <div className="flex md:flex-row flex-col  gap-2  lg:mx-48  mx-11 my-12    ">
+        <div className=" md:w-10/12 w-full ">
           <Tab.Group
             defaultIndex={selectedIndex}
             selectedIndex={selectedIndex}
             onChange={setSelectedIndex}
           >
-            <Tab.List className=" md:ml-10  sm:ml-16 flex gap-5">
+            <Tab.List className=" md:ml-10  sm:ml-16 gap-2  flex">
               {authStore.isLoggedIn ? (
                 <Tab as={Fragment}>
                   {({ selected }) => (
@@ -67,7 +67,7 @@ const HomePage = () => {
                           : "text-gray-500  dark:text-gray-200 "
                       }
                     >
-                      Your Feed
+                      <p className="w-28">Your Feed</p>
                     </button>
                   )}
                 </Tab>
@@ -81,7 +81,7 @@ const HomePage = () => {
                         : " text-gray-500  dark:text-gray-200  "
                     }
                   >
-                    Global Feed
+                    <p className="w-28"> Global Feed</p>
                   </button>
                 )}
               </Tab>
@@ -94,7 +94,7 @@ const HomePage = () => {
                       className={
                         selected
                           ? "text-green outline-none  border-b-2 border-b-green py-2"
-                          : " text-gray-500  dark:text-gray-200 "
+                          : " text-gray-500  dark:text-gray-200"
                       }
                     >
                       <div className="flex items-center gap-1">
@@ -105,18 +105,19 @@ const HomePage = () => {
                 </Tab>
               )}
             </Tab.List>
-            <hr className="h-px bg-gray-200 border-0 dark:bg-gray-700 md:ml-10 sm:ml-16 " />
+            <hr className=" h-px bg-gray-100 border-0 dark:bg-gray-700    md:ml-10  sm:ml-16 gap-2" />
+
             <Tab.Panels>
               {authStore.isLoggedIn ? (
                 <Tab.Panel>
-                  <Articles query="feed?" url="/" />
+                  <Articles query="feed?" />
                 </Tab.Panel>
               ) : null}
               <Tab.Panel>
-                <Articles query="?" url="/" />
+                <Articles query="?" />
               </Tab.Panel>
               <Tab.Panel>
-                <Articles query={`?tag=${tagName}&`} url="/" />
+                <Articles query={`?tag=${tagName}&`} />
               </Tab.Panel>
             </Tab.Panels>
           </Tab.Group>

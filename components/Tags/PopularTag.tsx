@@ -16,7 +16,7 @@ const PopularTag = ({ handleTag }: IPopularTagsProps) => {
 
   return (
     <>
-      <nav className="shadow-sm rounded-md bg-darkGray dark:bg-neutral-600 flex flex-col p-4 h-full  md:w-56 w-full">
+      <nav className="shadow-sm rounded-md bg-darkGray dark:bg-neutral-600 flex flex-col p-4 h-full  md:w-56 w-full  ">
         <h1 className="mb-1 text-gray-900  dark:text-white font-semibold dark ">
           Popular Tags
         </h1>

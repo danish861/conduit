@@ -25,12 +25,15 @@ const Pagination = ({
         <ul className=" flex flex-wrap -space-x-px rounded-sm">
           {pageNumber.map((num, index) => {
             return (
-              <li className="flex" key={num}>
+              <li
+                className={`flex ${pageLength === 1 ? "hidden" : ""}`}
+                key={num}
+              >
                 <Link
                   href=""
-                  className={`px-3 py-2 leading-tight text-green bg-white border border-gray-300 hover:bg-gray-100 hover:underline   ${
+                  className={`px-3 py-3 leading-tight text-green bg-white border border-gray-300 hover:bg-gray-100 hover:underline   ${
                     selectedPage === num
-                      ? "text-gray-200 hover:bg-green hover:text-gray-100 bg-lime-500"
+                      ? "text-white hover:text-gray-100 bg-green_1 hover:bg-lime-800  "
                       : ""
                   }   ${index === 0 ? "rounded-l-md" : ""}   ${
                     index === pageNumber.length - 1 ? "rounded-r-md" : ""

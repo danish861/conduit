@@ -25,7 +25,7 @@ const MainNavigation = observer((props: any) => {
         <div className="flex gap-7">
           <Link
             href="/"
-            className="font-Titillium text-green text-xl font-bold"
+            className="font-Titillium text-green text-2xl font-bold"
           >
             conduit
           </Link>

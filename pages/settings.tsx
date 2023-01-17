@@ -39,17 +39,17 @@ const SettingsPage = () => {
 
   const { data, error: err } = useSWR("/user", (url) => getUser(url));
 
-  console.log(
-    "errrorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
-    err
-  );
+  // console.log(
+  //   "errrorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
+  //   err
+  // );
 
   if (!data) {
     return;
   }
   const user = data.user;
 
-  console.log(typeof user.username);
+  // console.log(typeof user.username);
 
   // useEffect(() => {
   //   const userData = async () => {

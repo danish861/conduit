@@ -48,9 +48,11 @@ const ArticleDetails = ({
     <>
       <div className="bg-mildBlack ">
         <div className="mx-9  md:mx-40 p-7  gap-3  flex flex-col ">
-          <h1 className="text-4xl font-semibold text-white mb-6  ">{title}</h1>
+          <h1 className="text-4xl font-semibold font-source-sans-pro text-white mb-6  ">
+            {title}
+          </h1>
           <div className=" flex items-center gap-5  ">
-            <UserDetails author={author} updatedAt={updatedAt} />
+            <UserDetails author={author} updatedAt={updatedAt} color="white" />
 
             <div className=" flex md:flex-row xs:flex-col xs:gap-1  md:gap-0 ">
               {authStore.username === username ? (
@@ -89,7 +91,7 @@ const ArticleDetails = ({
         </div>
       </div>
       <div className="mx-9  lg:mx-40 p-7 ">
-        <p className="leading-7 text-lg mb-5">{body}</p>
+        <p className="leading-7 text-lg font-source-sans-pro mb-5">{body}</p>
         <ul className="flex">
           {tagList?.map((tag, index) => (
             <div key={index}>

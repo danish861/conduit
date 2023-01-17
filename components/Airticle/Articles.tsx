@@ -15,7 +15,6 @@ import { toast } from "react-toastify";
 
 interface ArticlesProps {
   query: string;
-  url: string;
 }
 
 interface Article {
@@ -31,7 +30,7 @@ interface Article {
   tagList: string[];
 }
 
-const Articles = ({ query, url }: ArticlesProps) => {
+const Articles = ({ query }: ArticlesProps) => {
   const router = useRouter();
   const [offset, setOffset] = useState(1);
   const [selectedPage, setCurrentPage] = useState(1);
@@ -54,12 +53,13 @@ const Articles = ({ query, url }: ArticlesProps) => {
   }, [token, authStore.token]);
 
   const queryString = `${query}limit=10&offset=${10 * (offset - 1)}`;
+
   const { data, error, isLoading } = useSWR(`articles/${queryString}`, (url) =>
     getArticleData(url)
   );
 
   if (!data) {
-    return <div>Loading</div>;
+    return <ColorRing />;
   }
 
   if (error) {
@@ -84,8 +84,8 @@ const Articles = ({ query, url }: ArticlesProps) => {
 
   return (
     <>
-      <div className="flex flex-col items-center gap-4 mb-10  ">
-        <div className="flex flex-col  justify-center md:w-11/12  sm:w-4/5 ">
+      <div className="flex flex-col items-center gap-4 mb-10  mt-3  ">
+        <div className="flex flex-col  justify-center md:w-11/12  sm:w-4/5  ">
           {articles.map((data, index) => {
             return (
               <>
@@ -108,13 +108,13 @@ const Articles = ({ query, url }: ArticlesProps) => {
                         pathname: `article/${data.slug}`,
                         // hash: "/",
                       }}
-                      className="text-2xl font-semibold text-gray-900  dark:text-gray-300"
+                      className="text-2xl font-source-sans-pro font-semibold text-gray-700  dark:text-gray-300"
                     >
                       {data.title}
                     </Link>
                     <Link
                       href={`article/${data.slug}`}
-                      className="text-gray-400  dark:text-gray-600  "
+                      className="text-gray-300 font-source-sans-pro  dark:text-gray-600  "
                     >
                       {data.description}
                     </Link>
@@ -128,13 +128,18 @@ const Articles = ({ query, url }: ArticlesProps) => {
                     </Link>
                     <ul className="flex justify-end mb-5">
                       {data.tagList.map((tag, index) => (
-                        <Link href={`article/${data.slug}`} key={index}>
+                        // href={`article/${data.slug}`}
+                        <Link
+                          href={`article/${data.slug}`}
+                          // onClick={() => router.replace(`article/${data.slug}`)}
+                          key={index}
+                        >
                           <ArticlTag tag={tag} />
                         </Link>
                       ))}
                     </ul>
                   </div>
-                  <hr className=" h-px bg-gray-200 border-0 dark:bg-gray-700" />
+                  <hr className=" h-px bg-gray-100 border-0 dark:bg-gray-700" />
                 </div>
               </>
             );
